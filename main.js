@@ -95,9 +95,14 @@ for (const it in parseTable) {
 			let text = await fetch_artwork(url);
 			let match = parseStatistics(text);
 
+			let days = new Date();
 			let date = new Date(search_json.body.illustManga.data[i].createDate);
-			let days = (statistics.time - date) / (1000 * 60 * 60 * 24);
 
+			//TO DO:
+			//It's just an linear approximation, would be nice to
+			//do interpolation but not enough resources to monitor this information. Nobody is interested so... it goes to the old things box, as always.
+			days = (days - date) / (1000 * 60 * 60 * 24);
+			
 			let views = Number(match.views);
 			let likes = Number(match.likes);
 			let views_day = views / days;
